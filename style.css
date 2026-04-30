@@ -1,0 +1,453 @@
+/* --- VARIABLES DE COLOR --- */
+:root {
+    /* Tema Claro (Por defecto) */
+    --bg-color: #f0f2f5;
+    --card-bg: #ffffff;
+    --text-primary: #1c1e21;
+    --text-secondary: #65676b;
+    --border-color: #e4e6eb;
+    --btn-primary-bg: #1c1e21;
+    --btn-primary-text: #ffffff;
+    --btn-secondary-bg: #ffffff;
+}
+
+[data-theme="dark"] {
+    /* Tema Oscuro */
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-primary: #f5f6f7;
+    --text-secondary: #b0b3b8;
+    --border-color: #3a3b3c;
+    --btn-primary-bg: #f5f6f7;
+    --btn-primary-text: #1c1e21;
+    --btn-secondary-bg: transparent;
+}
+
+/* --- ESTILOS BASE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 2rem;
+    margin: 0;
+    /* Método infalible para centrar con Flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Evita que el contenido se estire de forma extraña */
+    min-height: 100vh; /* Asegura que ocupe todo el alto de la pantalla */
+}
+
+.container {
+    width: 100%;
+    /* Aumenta este valor. 1100px o 1200px es ideal para pantallas anchas */
+    max-width: 1100px; 
+    margin: 0 auto;
+}
+
+/* --- TARJETAS --- */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* --- ENCABEZADO Y PERFIL --- */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.profile-info {
+    display: flex;
+    gap: 25px;
+}
+
+.profile-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+}
+
+.profile-details h1 {
+    font-size: 26px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge {
+    color: #1d9bf0; /* Color del check de verificación */
+    font-size: 18px;
+}
+
+.profile-details .location, 
+.profile-details .title {
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+/* --- BOTONES --- */
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+button, .action-buttons a {
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none; /* Esto evita que el texto se subraye */
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.btn-primary {
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+}
+
+.btn-secondary {
+    background-color: var(--btn-secondary-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+/* --- INTERRUPTOR MODO OSCURO (TOGGLE) --- */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 28px;
+    position: relative;
+    width: 54px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #e4e6eb;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    background-color: white;
+    bottom: 4px;
+    content: "";
+    height: 20px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 20px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+input:checked + .slider {
+    background-color: #1c1e21;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+/* --- ACTUALIZACIÓN DEL CONTENEDOR DEL INTERRUPTOR --- */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Esto crea la separación entre el sol y el interruptor */
+}
+
+/* --- ICONO DEL SOL AL COSTADO --- */
+.icon-sun {
+    font-size: 22px;
+    /* Usamos la variable de texto para que sea negro en modo claro y blanco en modo oscuro */
+    color: var(--text-primary); 
+    transition: color 0.3s ease;
+    line-height: 1;
+}
+
+/* --- DISEÑO DE COLUMNAS (MAIN CONTENT) --- */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card h2 {
+    margin-bottom: 16px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+/* --- LÍNEA DE TIEMPO (EXPERIENCE) --- */
+.timeline {
+    border-left: 2px solid var(--border-color);
+    margin-left: 10px;
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -27px; /* Alineado con el borde de la línea */
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--text-primary);
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.timeline-content h3 {
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+}
+
+.timeline-content span {
+    color: var(--text-secondary);
+    font-weight: normal;
+    font-size: 13px;
+}
+
+/* --- DISEÑO RESPONSIVE (Para Celulares) --- */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr; /* Cambia a 1 sola columna en móviles */
+    }
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .profile-info {
+        flex-direction: column;
+        align-items: center;
+    }
+    .theme-switch-wrapper {
+        margin-top: 20px;
+    }
+    .action-buttons {
+        justify-content: center;
+    }
+}
+
+/* --- ESTILOS PARA LISTAS (Proyectos y Certificaciones) --- */
+.list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.list-item {
+    background-color: var(--bg-color); /* Usa el fondo principal para crear contraste dentro de la tarjeta */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.list-item h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
+    color: var(--text-primary);
+}
+
+.list-item p {
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}
+
+.link {
+    font-size: 13px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/* --- ESTILOS PARA REDES SOCIALES --- */
+.social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas para los botones sociales */
+    gap: 10px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.social-btn:hover {
+    background-color: var(--border-color);
+}
+
+/* Ajuste responsive para los botones sociales */
+@media (max-width: 768px) {
+    .social-grid {
+        grid-template-columns: 1fr; /* Una columna en celulares */
+    }
+}
+
+
+/* --- FILA INFERIOR (metas, Redes, Contacto) --- */
+.bottom-row {
+    grid-column: 1 / -1; 
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr; 
+    /* Reduce este número para juntar los cuadros. Puedes probar con 8px o 5px */
+    gap: 8px; 
+    margin-top: -12px;
+}
+
+.social-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.social-btn-list, .contact-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.social-btn-list:hover, .contact-btn:hover {
+    background-color: var(--border-color);
+}
+
+/* Estructura interna de la tarjeta de contacto */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Divide el texto y los botones en dos mitades */
+    gap: 15px;
+}
+
+.contact-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-btn span {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.contact-btn span strong {
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+/* Responsive: Que se apilen una debajo de otra en celulares */
+@media (max-width: 900px) {
+    .bottom-row {
+        grid-template-columns: 1fr; /* 1 sola columna en pantallas pequeñas */
+    }
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- PIE DE PÁGINA (FOOTER) --- */
+.footer {
+    text-align: center;
+    padding: 25px 0 10px 0;
+    margin-top: 20px;
+    border-top: 1px solid var(--border-color); /* Línea sutil adaptativa */
+}
+
+.footer p {
+    color: var(--text-secondary); /* Usa el color secundario para que no resalte demasiado */
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.emoji-oscuro {
+    filter: grayscale(100%) invert(100%);
+}
